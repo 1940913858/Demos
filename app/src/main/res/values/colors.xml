@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="habit_choose_bg_color">#FFF1F0</color>
+    <color name="habit_choose_text_color">#FF5658</color>
+    <color name="red_a">#ff87a0</color>
+    <color name="blue">#00ACED</color>
+
+    <color name="colorRed2">#FF584C</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="record_progress_bg">#66000000</color> <!-- 40%不透明度 -->
+    <color name="record_progress">#ff584c</color>
+    <color name="record_progress_pending">#a8002d</color>
+
+    <color name="black">#000000</color>
+    <color name="input_text_color">#00f5ac</color>
+
+    <color name="colorAccentTransparent30">#B2FF584C</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="transparent">#00000000</color>
+    <color name="editer_bottom">#1F2531</color>
+    <!--gray5-->
+    <color name="colorGray5">#505050</color>
+    <color name="spirit_out_color">#EC5F9B</color>
+    <color name="spirit_out_color_press">#B21FC0CC</color>
+
+    <color name="screen_split">#EC8435</color>
+    <color name="screen_split_press">#B2FFBB00</color>
+
+    <color name="light_wave">#1FBCB6</color>
+    <color name="light_wave_press">#B2655CE6</color>
+
+    <color name="dark_illusion">#449FF3</color>
+    <color name="dark_illusion_press">#B2006EFF</color>
+
+    <color name="win_shaddow_color">#FF6EA745</color>
+    <color name="win_shaddow_color_press">#CC6EA745</color>
+
+    <color name="ghost_shaddow_color">#FF47A9B2</color>
+    <color name="ghost_shaddow_color_press">#CC47A9B2</color>
+
+    <color name="phantom_shaddow_color">#FF4368BC</color>
+    <color name="phantom_shaddow_color_press">#CC4368BC</color>
+
+    <color name="ghost_color">#FF6A3FC6</color>
+    <color name="ghost_color_press">#CC6A3FC6</color>
+
+    <color name="lightning_color">#FFC73AD1</color>
+    <color name="lightning_color_press">#CCC73AD1</color>
+    <!--10-->
+    <color name="mirror_color">#FFDB347F</color>
+    <color name="mirror_color_press">#CCDB347F</color>
+    <!--11-->
+    <color name="illusion_color">#FF7F554C</color>
+    <color name="illusion_color_press">#CC7F554C</color>
+
+    <color name="colorGray4">#787878</color>
+
+</resources>

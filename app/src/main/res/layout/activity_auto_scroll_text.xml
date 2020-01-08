@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.example.meetyou.myapplication.view.AutoScrollTextViewMeiyou
+        android:id="@+id/hehe"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone">
+
+    </com.example.meetyou.myapplication.view.AutoScrollTextViewMeiyou>
+
+    <com.example.meetyou.myapplication.view.AutoScrollTextView
+        android:id="@+id/vertical"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:background="#FF0000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"></com.example.meetyou.myapplication.view.AutoScrollTextView>
+
+</android.support.constraint.ConstraintLayout>

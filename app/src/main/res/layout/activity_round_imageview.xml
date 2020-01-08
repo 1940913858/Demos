@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <!--方式一-->
+    <com.example.meetyou.myapplication.view.RoundImageView
+        android:id="@+id/view"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/yima_aajl_wucuoshi"/>
+    <!--方式二-->
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_image"
+        android:src="@drawable/yima_aajl_wucuoshi"
+        android:padding="1dp"/>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="classify_indicator_width">14dip</dimen>
+    <dimen name="classify_indicator_height">3dip</dimen>
+    <dimen name="category_tab_text">14dp</dimen>
+    <dimen name="ugc_aspect_divider">18dp</dimen>
+    <dimen name="ugc_progress_divider">1dp</dimen>
+    <dimen name="ugc_progress_min_pos">2dp</dimen>
+    <dimen name="ugc_progress_cursor">2dp</dimen>
+    <dimen name="ugc_aspect_width">50dp</dimen>
+    <dimen name="video_progress_height">50dp</dimen>
+    <dimen name="video_thumbnail_width">50dp</dimen>
+    <dimen name="repeat_slider_width">26dp</dimen>
+    <!--h5-->
+    <dimen name="h5">13sp</dimen>
+</resources>

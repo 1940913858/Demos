@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.example.meetyou.myapplication.progresscolor.ColorText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        app:progress="0.3"
+        app:text="我只是一个无聊的文本小控件，啦啦啦啦啦啦啦啦啦"
+        app:text_change_color="@color/colorPrimary"
+        app:text_origin_color="@color/colorAccent"
+        app:text_size="20sp"
+        android:visibility="gone"/>
+
+    <com.example.meetyou.myapplication.progresscolor.ColorText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:progress="0.3"
+        app:text="我只是一个无聊的文本小控件，啦啦啦啦啦啦啦啦啦"
+        app:text_change_color="@color/colorPrimary"
+        app:text_origin_color="@color/colorAccent"
+        app:text_size="20sp"
+        android:visibility="gone"/>
+
+    <com.example.meetyou.myapplication.progresscolor.RoundedRectangleProgress
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        app:change_color="#dbaaaa"
+        app:origin_color="#FF0000"
+        app:progress="0.3"
+        app:text="我只是一个无聊的文本小控件，啦啦啦啦啦啦啦啦啦"
+        app:text_change_color="#001100"
+        app:text_origin_color="#FFFFFF"
+        app:text_size="20sp"
+        android:visibility="gone"/>
+
+    <com.example.meetyou.myapplication.progresscolor.RoundedRectangleProgress
+        android:id="@+id/rrp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        app:change_color="#eeaaff"
+        app:origin_color="#FF0000"
+        app:text="点击下载"
+        app:text_change_color="#0011aa"
+        app:text_origin_color="#FFFFFF"
+        app:text_size="20sp"
+        android:visibility="gone"/>
+
+
+
+    <com.example.meetyou.myapplication.progresscolor.RoundedRectangleProgress
+
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        app:change_color="#0011aa"
+        app:origin_color="#FF0000"
+        app:progress="1"
+        app:text="啦啦啦"
+        app:text_change_color="#FA7192"
+        app:text_origin_color="#FFFFFF"
+        app:text_size="20sp" />
+</LinearLayout>
