@@ -49,8 +49,5 @@ dependencies {
     // okhttp3的依赖
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
 
-    compile 'de.hdodenhof:circleimageview:2.2.0'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.greenrobot:eventbus:3.0.0'
 
 }

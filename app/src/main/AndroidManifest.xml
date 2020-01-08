@@ -278,36 +278,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.TecentVideoDemoActivity"
-            android:label="腾讯短视频SDK,DEMO"
-            android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".activity.TecentRecordDemoActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
-        <activity
-            android:name=".activity.TCVideoPreprocessActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
-        <activity
-            android:name=".activity.TCVideoEditerActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
-        <activity
-            android:name=".activity.TCVideoEffectActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-
     </application>
 
 </manifest>
