@@ -2,9 +2,12 @@ package com.example.meetyou.myapplication.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.util.Log;
@@ -49,9 +52,13 @@ public class RequestPermissionActivity extends Activity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
-        Log.e("senfa", "result" + (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED));
 
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
             return false;
         }
 

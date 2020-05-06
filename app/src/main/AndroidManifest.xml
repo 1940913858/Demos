@@ -278,6 +278,56 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.AnimationSetActivity"
+            android:label="AnimationSet动画">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.DoubleActivity"
+            android:label="双指放大缩小">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.FullScreenDialogActivity"
+            android:label="全屏的dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.FullScreenDialogActivity2"
+            android:windowSoftInputMode="stateVisible">
+        </activity>
+
+        <activity
+            android:name=".activity.WeiboTopicActivity"
+            android:label="仿微博话题控件">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.FileActivity"
+            android:label="文件操作">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

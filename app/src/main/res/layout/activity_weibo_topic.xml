@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        android:textCursorDrawable="@drawable/bubble_edittext_shape"
+        android:gravity="top"
+        android:hint="写标题能让更多人看到"
+        android:maxEms="55"
+        android:minHeight="22dp"
+        android:minLines="3"
+        android:paddingTop="6dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="6dp"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/topic_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="添加话题" />
+</LinearLayout>

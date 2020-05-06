@@ -28,13 +28,12 @@ public class PopWindowActivity extends Activity {
          textView = findViewById(R.id.text);
 
 
-
-        textView.post(new Runnable() {
-            @Override
-            public void run() {
-                MyViewHelper.getInstance().showLightView(PopWindowActivity.this, textView, "第一个");
-            }
-        });
+//        textView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                MyViewHelper.getInstance().showLightView(PopWindowActivity.this, textView, "第一个");
+//            }
+//        });
 
 
 //        // 2. 显示提示用户操作的浮层
@@ -52,15 +51,20 @@ public class PopWindowActivity extends Activity {
 //                    }
 //                }).show();
 
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        showPopWindow();
 
-//        textView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                showPopWindow();
-//
 //                darkenBackground(0.2f);
-//            }
-//        });
+                    }
+                });
+            }
+        });
+
     }
 
     private void darkenBackground(Float bgcolor) {
@@ -82,6 +86,7 @@ public class PopWindowActivity extends Activity {
                 popupWindow.setFocusable(false);
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupWindow.setAnimationStyle(R.style.pop_animation);
                 popupWindow.showAsDropDown(textView, -100, 0);
                 popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
@@ -90,6 +95,7 @@ public class PopWindowActivity extends Activity {
                         darkenBackground(1f);
                     }
                 });
+
 //                rlvideo_feeds_entry.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
