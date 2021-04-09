@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@drawable/edu_apk_all_white_selector"
+    tools:ignore="UselessParent"
+    android:layout_marginTop="20dp">
+
+    <TextView
+        android:id="@+id/play_all_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="全部播放"
+        android:textSize="16sp"/>
+
+</RelativeLayout>

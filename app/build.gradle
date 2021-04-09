@@ -50,5 +50,9 @@ dependencies {
     // okhttp3的依赖
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
 
+    //取色器
+    implementation 'com.android.support:palette-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+
 
 }

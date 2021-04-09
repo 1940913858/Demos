@@ -39,6 +39,51 @@
         </activity>
 
         <activity
+            android:name=".activity.HorizontalRvActivity"
+            android:label="类似幻灯片中间比较大的横向滑动列表">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.TabViewpagerActivity"
+            android:label="viewpager 刷新demo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.MainColorActivity"
+            android:label="取某图片的主色调">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.MusicPlayButtonActivity"
+            android:label="儿歌故事音乐播放按钮">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.TagsViewActivity"
+            android:label="Tags布局">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".activity.HorizotalRVMaxActivity"
             android:label="@string/horizotal_recyclerview">
             <intent-filter>
@@ -328,6 +373,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.TestActivity"
+            android:label="测试类">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

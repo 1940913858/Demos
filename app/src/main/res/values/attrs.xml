@@ -133,4 +133,10 @@
         <attr name="object_foreground_color" format="color" />
         <attr name="object_background_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="MusicPlayButtonView">
+        <attr name="color_in" format="color"/>
+        <attr name="color_out" format="color" />
+        <attr name="color_circle_width" format="dimension"/>
+    </declare-styleable>
 </resources>
