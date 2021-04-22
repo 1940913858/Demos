@@ -139,4 +139,29 @@
         <attr name="color_out" format="color" />
         <attr name="color_circle_width" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="SlidingTabLayout">
+        <attr format="dimension" name="slidingTabTextSize"/>
+        <attr format="dimension" name="slidingTabTextSelectSize"/>
+        <attr format="reference|color" name="slidingTabTextColor"/>
+        <attr format="reference|color" name="slidingTabTextSelectColor"/>
+        <attr format="reference" name="slidingTabTextBackground"/>
+        <attr format="reference|color" name="slidingTabIndicatorColor"/>
+        <attr format="dimension" name="slidingTabIndicatorHight"/>
+        <attr format="dimension" name="slidingTabIndicatorWidth"/>
+        <attr format="dimension" name="slidingTabPadding"/>
+        <attr format="reference|color" name="slidingTabDividerColor"/>
+        <attr format="dimension" name="slidingTabMargin"/>
+        <attr format="dimension" name="slidingTabMarginLeft"/>
+        <attr format="dimension" name="slidingTabMarginRight"/>
+        <attr format="boolean" name="isAllCaps"/>
+        <attr name="slidingTabStyle">
+            <enum name="typeDefault" value="0"/>
+            <enum name="typeAlignCenter" value="1"/>
+            <enum name="typeAverage" value="2"/>
+            <enum name="typeAdaption" value="3"/>
+        </attr>
+        <attr format="float" name="countPerScreen"/>
+    </declare-styleable>
+
 </resources>

@@ -176,6 +176,7 @@ public class TabViewpagerActivity extends FragmentActivity implements View.OnCli
 
         @Override
         public void notifyDataSetChanged() {
+            changeId(System.currentTimeMillis());
             super.notifyDataSetChanged();
         }
 

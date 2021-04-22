@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.meetyou.myapplication.R;
+
 public class MyFragment extends Fragment {
 
     public MyFragment() {
@@ -34,11 +36,10 @@ public class MyFragment extends Fragment {
             addPosition = bundle.getInt("DAY");
         }
 
+        View inflate = getLayoutInflater().inflate(R.layout.activity_fragment_item, null);
+        TextView text = inflate.findViewById(R.id.text);
+        text.setText(addPosition + "嘿嘿");
 
-
-        TextView tv = new TextView(getActivity());
-        tv.setBackgroundColor(Color.RED);
-        tv.setText(addPosition + "嘿嘿");
-        return tv;
+        return inflate;
     }
 }

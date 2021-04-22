@@ -1,59 +1,164 @@
 package com.example.meetyou.myapplication.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.example.meetyou.myapplication.R;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
+
 /**
- * ClassName: CategoryTabStrip <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Date:2017-3-2
- *
- * @author senfa.chen
- * @version 0.1
- * @since MT 3.5
+ * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
+ * the user's scroll progress.
+ * <p/>
+ * To use the component, simply add it to your view hierarchy. Then in your
+ * {@link android.app.Activity} or {@link android.support.v4.app.Fragment} call
+ * {@link #setViewPager(ViewPager)} providing it the ViewPager this layout is being used for.
+ * <p/>
+ * The colors can be customized in two ways. The first and simplest is to provide an array of colors
+ * via {@link #setSelectedIndicatorColors(int...)} and {@link #setDividerColors(int...)}. The
+ * alternative is via the {@link TabColorizer} interface which provides you complete control over
+ * which color is used for any individual position.
+ * <p/>
+ * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
+ * providing the layout ID of your custom layout.
  */
 public class CategoryTabStrip extends HorizontalScrollView {
-    private LayoutInflater mLayoutInflater;
-    private final PageListener pageListener = new PageListener();
-    private ViewPager pager;
-    private LinearLayout tabsContainer;
-    private int tabCount;
 
-    private int currentPosition = 0;
-    private float currentPositionOffset = 0f;
+    /**
+     * Allows complete control over the colors drawn in the tab layout. Set with
+     * {@link #setCustomTabColorizer(TabColorizer)}.
+     */
+    public interface TabColorizer {
 
-    private Rect indicatorRect;
+        /**
+         * @return return the color of the indicator used when {@code position} is selected.
+         */
+        int getIndicatorColor(int position);
 
-    private LinearLayout.LayoutParams defaultTabLayoutParams;
+        /**
+         * @return return the color of the divider drawn to the right of {@code position}.
+         */
+        int getDividerColor(int position);
 
-    private int scrollOffset = 10;
+    }
 
-    private Drawable indicator;
-    private int mIndicatorWidth;
-    private int mIndicatorHeight;
-    private Scroller mScroller;
+    public static final int LAYOUT_STYLE_DEFAULT = 0;
+    public static final int LAYOUT_STYLE_ALIGN_CENTER = 1;
+    public static final int LAYOUT_STYLE_AVERAGE = 2;
+    public static final int LAYOUT_STYLE_ADAPTION = 3;
 
-    //if first into, scroll fast the tab to the specified location
-    private boolean isFirstInto = true;
+    Context mContext;
+    /**
+     * text size
+     */
+    private float slidingTabTextSize = 16;
 
-    public static final int HORIZATOL_SCROLLVIEW_SPEED = 1000;
+    private float slidingTabTextSelectSize = 0;
+
+    /**
+     * 文字颜色 black_A
+     */
+    private int slidingTabTextColor = Color.parseColor("#323232");
+
+    /**
+     * 文字选中颜色 yq_orange_a
+     */
+    protected int slidingTabTextSelectColor = Color.parseColor("#FF7181");
+
+    /**
+     * tab 背景
+     */
+    private int slidingTabTextBackground = Color.parseColor("#00000000");
+    /**
+     * 底部标签颜色 yq_orange_a
+     */
+    private int slidingTabIndicatorColor = Color.parseColor("#FF7181");
+
+    /**
+     * 底部标签高度 dp
+     */
+    private float slidingTabIndicatorHight = 2;
+
+    /**
+     * 底部标签宽度 dp
+     */
+    private float slidingTabIndicatorWidth = 0;
+
+    /**
+     * 是否默认大写
+     */
+    private boolean isAllCaps = true;
+
+    /**
+     * 分割线颜色 透明
+     */
+    private int slidingTabDividerColor = Color.TRANSPARENT;
+
+    /**
+     * 左右padding
+     */
+    private float slidingTabPadding = 12.5f;
+
+    /**
+     * 控件样式
+     * 默认  LAYOUT_STYLE_DEFAULT = 0
+     * 居中  LAYOUT_STYLE_ALIGN_CENTER = 1
+     * 均分  LAYOUT_STYLE_AVERAGE = 2
+     */
+    private int slidingTabStyle = LAYOUT_STYLE_DEFAULT;
+
+    /**
+     * 居中样式，最大显示个数
+     */
+    private float countPerScreen = 4.5F;
+
+    private static final int TITLE_OFFSET_DIPS = 24;
+
+    private int mTitleOffset;
+
+    private int mTabViewLayoutId;
+    private int mTabViewTextViewId;
+
+    private ViewPager mViewPager;
+    private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
+
+    protected SlidingTabStrip mTabStrip;
+
+    protected int mCurrentPosition = -1;
+
+    /**
+     * 左margin
+     */
+    private float slidingTabMarginLeft = 0;
+    /**
+     * 右margin
+     */
+    private float slidingTabMarginRight = 0;
+
+    public static int sp2px(Context context, float spValue) {
+        if(mScaledDensity==0)
+            mScaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * mScaledDensity + 0.5f);
+    }
+
+    private static float  mScaledDensity;
 
     public CategoryTabStrip(Context context) {
         this(context, null);
@@ -65,201 +170,349 @@ public class CategoryTabStrip extends HorizontalScrollView {
 
     public CategoryTabStrip(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mLayoutInflater = LayoutInflater.from(context);
-        indicatorRect = new Rect();
+        this.mContext = context;
+
+        this.slidingTabTextSize = sp2px(context, slidingTabTextSize);//sp转px
+        TypedArray t = getContext().obtainStyledAttributes(attrs, R.styleable.SlidingTabLayout);
+        this.slidingTabTextSize = t.getDimension(R.styleable.SlidingTabLayout_slidingTabTextSize, slidingTabTextSize);
+        this.slidingTabTextSelectSize = t.getDimension(R.styleable.SlidingTabLayout_slidingTabTextSelectSize, slidingTabTextSelectSize);
+        this.slidingTabTextColor = t.getResourceId(R.styleable.SlidingTabLayout_slidingTabTextColor, slidingTabTextColor);
+        this.slidingTabTextSelectColor = t.getResourceId(R.styleable.SlidingTabLayout_slidingTabTextSelectColor, slidingTabTextSelectColor);
+        this.slidingTabTextBackground = t.getResourceId(R.styleable.SlidingTabLayout_slidingTabTextBackground, slidingTabTextBackground);
+        this.slidingTabIndicatorColor = t.getResourceId(R.styleable.SlidingTabLayout_slidingTabIndicatorColor, slidingTabIndicatorColor);
+        this.slidingTabDividerColor = t.getColor(R.styleable.SlidingTabLayout_slidingTabDividerColor, slidingTabDividerColor);
+        this.isAllCaps = t.getBoolean(R.styleable.SlidingTabLayout_isAllCaps, isAllCaps);
+        this.slidingTabStyle = t.getInt(R.styleable.SlidingTabLayout_slidingTabStyle, slidingTabStyle);
+        this.countPerScreen = t.getFloat(R.styleable.SlidingTabLayout_countPerScreen, countPerScreen);
+        this.slidingTabIndicatorHight = t.getDimension(R.styleable.SlidingTabLayout_slidingTabIndicatorHight, slidingTabIndicatorHight);
+        this.slidingTabIndicatorWidth = t.getDimension(R.styleable.SlidingTabLayout_slidingTabIndicatorWidth, slidingTabIndicatorWidth);
+        this.slidingTabPadding = t.getDimension(R.styleable.SlidingTabLayout_slidingTabPadding, slidingTabPadding);
+        this.slidingTabMarginLeft = t.getDimension(R.styleable.SlidingTabLayout_slidingTabMarginLeft, slidingTabMarginLeft);
+        this.slidingTabMarginRight = t.getDimension(R.styleable.SlidingTabLayout_slidingTabMarginRight, slidingTabMarginRight);
+        t.recycle();
+
+        // Disable the Scroll Bar
+        setHorizontalScrollBarEnabled(false);
+        // Make sure that the Tab Strips fills this View
         setFillViewport(true);
-        setWillNotDraw(false);
-        // 标签容器
-        tabsContainer = new LinearLayout(context);
-        tabsContainer.setOrientation(LinearLayout.HORIZONTAL);
-        tabsContainer.setLayoutParams(new LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        addView(tabsContainer);
-
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        scrollOffset = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, scrollOffset, dm);
-
-        defaultTabLayoutParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-
-        // 绘制高亮区域作为滑动分页指示器
-        indicator = getResources()
-                .getDrawable(R.drawable.bg_category_indicator);
-
-        mIndicatorWidth = getResources().getDimensionPixelSize(
-                R.dimen.classify_indicator_width);
-        mIndicatorHeight = getResources().getDimensionPixelSize(
-                R.dimen.classify_indicator_height);
-
-        mScroller = new Scroller(context);
-    }
-
-    // 绑定与CategoryTabStrip控件对应的ViewPager控件，实现联动
-    public void setViewPager(ViewPager pager) {
-        this.pager = pager;
-
-        if (pager.getAdapter() == null) {
-            throw new IllegalStateException(
-                    "ViewPager does not have adapter instance.");
-        }
-        pager.setOnPageChangeListener(pageListener);
-        notifyDataSetChanged();
-        pageListener.onPageSelected(0);
-    }
-
-    // 当附加在ViewPager适配器上的数据发生变化时,应该调用该方法通知CategoryTabStrip刷新数据
-    public void notifyDataSetChanged() {
-        tabsContainer.removeAllViews();
-        tabCount = pager.getAdapter().getCount();
-        for (int i = 0; i < tabCount; i++) {
-            addTab(i, pager.getAdapter().getPageTitle(i).toString());
-        }
-
-    }
-
-    // 添加一个标签到导航菜单
-    private void addTab(final int position, String title) {
-        ViewGroup tab = (ViewGroup) mLayoutInflater.inflate(
-                R.layout.category_tab, this, false);
-        TextView category_text = (TextView) tab
-                .findViewById(R.id.category_text);
-        category_text.setText(title);
-        category_text.setGravity(Gravity.CENTER);
-        category_text.setSingleLine();
-        category_text.setFocusable(true);
-        tab.setOnClickListener(new OnClickListener() {
+        mTabStrip = new SlidingTabStrip(context);
+        addView(mTabStrip, MATCH_PARENT, MATCH_PARENT);
+        mTabStrip.setCustomTabColorizer(new TabColorizer() {
             @Override
-            public void onClick(View v) {
-                pager.setCurrentItem(position);
+            public int getIndicatorColor(int position) {
+                return slidingTabIndicatorColor;
+            }
+
+            @Override
+            public int getDividerColor(int position) {
+                return slidingTabDividerColor;
             }
         });
-
-        tabsContainer.addView(tab, position, defaultTabLayoutParams);
+        mTabStrip.setBottomBorderThickness(dpToPx(slidingTabIndicatorHight));
+        mTabStrip.setBottomWidth(dpToPx(slidingTabIndicatorWidth));
     }
 
-    // 计算滑动过程中矩形高亮区域的上下左右位置
-    private void calculateIndicatorRect(Rect rect) {
-        ViewGroup currentTab = (ViewGroup) tabsContainer
-                .getChildAt(currentPosition);
-        TextView category_text = (TextView) currentTab
-                .findViewById(R.id.category_text);
+    /**
+     * 设置SlidingTabLayout样式
+     */
+    public void setlayoutStyle(int style) {
+        this.slidingTabStyle = style;
+        invalidate();
+    }
 
-        float left = (float) (currentTab.getLeft() + category_text.getLeft());
-        float width = ((float) category_text.getWidth()) + left;
+    /**
+     * 左右 padding
+     * 使用自适应布局时有效
+     */
+    public void setTabPadding(float paddingDimension) {
+        this.slidingTabPadding = paddingDimension;
+        invalidate();
+    }
 
-        if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
-            ViewGroup nextTab = (ViewGroup) tabsContainer
-                    .getChildAt(currentPosition + 1);
-            TextView next_category_text = (TextView) nextTab
-                    .findViewById(R.id.category_text);
+    /**
+     * Set the custom {@link TabColorizer} to be used.
+     * <p/>
+     * If you only require simple custmisation then you can use
+     * {@link #setSelectedIndicatorColors(int...)} and {@link #setDividerColors(int...)} to achieve
+     * similar effects.
+     */
+    public void setCustomTabColorizer(TabColorizer tabColorizer) {
+        mTabStrip.setCustomTabColorizer(tabColorizer);
+    }
 
-            float next_left = (float) (nextTab.getLeft() + next_category_text
-                    .getLeft());
-            left = left * (1.0f - currentPositionOffset) + next_left
-                    * currentPositionOffset;
-            width = width * (1.0f - currentPositionOffset)
-                    + currentPositionOffset
-                    * (((float) next_category_text.getWidth()) + next_left);
+    /**
+     * Sets the colors to be used for indicating the selected tab. These colors are treated as a
+     * circular array. Providing one color will mean that all tabs are indicated with the same color.
+     */
+    public void setSelectedIndicatorColors(int... colors) {
+        mTabStrip.setSelectedIndicatorColors(colors);
+    }
+
+    /**
+     * Sets the colors to be used for tab dividers. These colors are treated as a circular array.
+     * Providing one color will mean that all tabs are indicated with the same color.
+     */
+    public void setDividerColors(int... colors) {
+        mTabStrip.setDividerColors(colors);
+    }
+
+    /**
+     * Set the {@link ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
+     * required to set any {@link ViewPager.OnPageChangeListener} through this method. This is so
+     * that the layout can update it's scroll position correctly.
+     *
+     * @see ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)
+     */
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
+        mViewPagerPageChangeListener = listener;
+    }
+
+    /**
+     * Set the custom layout to be inflated for the tab views.
+     *
+     * @param layoutResId Layout id to be inflated
+     * @param textViewId  id of the {@link TextView} in the inflated view
+     */
+    public void setCustomTabView(int layoutResId, int textViewId) {
+        mTabViewLayoutId = layoutResId;
+        mTabViewTextViewId = textViewId;
+    }
+
+    /**
+     * Sets the associated view pager. Note that the assumption here is that the pager content
+     * (number of tabs and tab titles) does not change after this call has been made.
+     */
+    public void setViewPager(ViewPager viewPager) {
+        mTabStrip.removeAllViews();
+
+        mViewPager = viewPager;
+        if (viewPager != null) {
+            viewPager.addOnPageChangeListener(new InternalViewPagerListener());
+            populateTabStrip();
         }
+    }
 
-        int leftStart = ((((int) left) + getPaddingLeft() * 2 + (int) width) / 2);
-        int topStart = getPaddingTop() + currentTab.getTop()
-                + category_text.getTop() + category_text.getHeight();
+    /**
+     * Create a default view to be used for tabs. This is called if a custom tab view is not set via
+     * {@link #setCustomTabView(int, int)}.
+     */
+    protected TextView createDefaultTabView(Context context) {
+        TextView textView = new TextView(context);
+//        textView.setTypeface(Typeface.DEFAULT_BOLD);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            // If we're running on ICS or newer, enable all-caps to match the Action Bar tab style
+            textView.setAllCaps(isAllCaps);
+        }
+        return textView;
+    }
 
-        rect.set(leftStart - mIndicatorWidth / 2, topStart - mIndicatorHeight,
-                leftStart + mIndicatorWidth / 2, topStart);
+    private void populateTabStrip() {
+        final PagerAdapter adapter = mViewPager.getAdapter();
+        final OnClickListener tabClickListener = new TabClickListener();
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View tabView = null;
+            TextView tabTitleView = null;
+
+            if (mTabViewLayoutId != 0) {
+                // If there is a custom tab view layout id set, try and inflate it
+                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
+                        false);
+                tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
+            }
+
+            if (tabView == null) {
+                tabView = createDefaultTabView(getContext());
+            }
+
+            if (tabTitleView == null && TextView.class.isInstance(tabView)) {
+                tabTitleView = (TextView) tabView;
+            }
+
+            tabTitleView.setText(adapter.getPageTitle(i));
+            tabView.setOnClickListener(tabClickListener);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
+            switch (slidingTabStyle) {
+                case LAYOUT_STYLE_ADAPTION:
+                    tabView.setPadding(dpToPx(slidingTabPadding), 0, dpToPx(slidingTabPadding), 0);
+                    break;
+                case LAYOUT_STYLE_ALIGN_CENTER:
+                    params.width = (int) (mContext.getResources().getDisplayMetrics().widthPixels / countPerScreen);
+                    break;
+                case LAYOUT_STYLE_AVERAGE:
+                    params.width = 0;
+                    params.weight = 1.0f;
+                    params.height = MATCH_PARENT;
+                    break;
+                default:
+                    break;
+
+            }
+            params.setMargins((int) slidingTabMarginLeft, 0, (int) slidingTabMarginRight, dpToPx(slidingTabIndicatorHight));
+            tabView.setLayoutParams(params);
+            ((TextView) tabView).setGravity(Gravity.CENTER);
+            ((TextView) tabView).setTextColor(slidingTabTextColor);
+            ((TextView) tabView).setBackgroundColor(slidingTabTextBackground);
+            ((TextView) tabView).setTextSize(TypedValue.COMPLEX_UNIT_PX, slidingTabTextSize);
+            mTabStrip.addView(tabView);
+        }
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        // 绘制高亮背景矩形红框
-        calculateIndicatorRect(indicatorRect);
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
 
-        // draw indicator
-        if (indicator != null) {
-            indicator.setBounds(indicatorRect);
-            indicator.draw(canvas);
+        if (mViewPager != null) {
+            scrollToTab(mViewPager.getCurrentItem(), 0);
         }
     }
 
-    private class PageListener implements OnPageChangeListener {
+    public void scrollToTab(int tabIndex, int positionOffset) {
+        final int tabStripChildCount = mTabStrip.getChildCount();
+        if (tabStripChildCount == 0 || tabIndex < 0 || tabIndex >= tabStripChildCount) {
+            return;
+        }
+
+        View selectedChild = mTabStrip.getChildAt(tabIndex);
+        if (selectedChild != null) {
+            if (positionOffset == 0) {
+                try {
+                    ((TextView) selectedChild).setTextColor(slidingTabTextSelectColor);
+                    if (slidingTabTextSelectSize != 0) {
+                        ((TextView) selectedChild).setTextSize(TypedValue.COMPLEX_UNIT_PX, slidingTabTextSelectSize);
+                        //((TextView) selectedChild).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    }
+                    onTabSelected(tabIndex, mCurrentPosition);
+                    if (mCurrentPosition >= 0 && mCurrentPosition != tabIndex) {
+                        TextView currentTextView = (TextView) mTabStrip.getChildAt(mCurrentPosition);
+
+                        ((TextView) currentTextView).setTextColor(slidingTabTextColor);
+                        currentTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, slidingTabTextSize);
+                        //currentTextView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                    }
+                    mCurrentPosition = tabIndex;
+                } catch (Exception e) {
+                    Log.e("SlidingTabLayout", "type error!");
+                }
+            }
+            int targetScrollX = (int) (selectedChild.getLeft() + positionOffset - slidingTabMarginLeft);
+            if (tabIndex > 0 || positionOffset > 0) {
+                switch (slidingTabStyle) {
+                    case LAYOUT_STYLE_ADAPTION:
+                    case LAYOUT_STYLE_ALIGN_CENTER:
+                        mTitleOffset = (mContext.getResources().getDisplayMetrics().widthPixels - selectedChild.getWidth()) / 2;
+                        break;
+                    case LAYOUT_STYLE_AVERAGE:
+                    case LAYOUT_STYLE_DEFAULT:
+                    default:
+                        mTitleOffset = dpToPx(TITLE_OFFSET_DIPS);
+                }
+                // If we're not at the first child and are mid-scroll, make sure we obey the offset
+                targetScrollX -= mTitleOffset;
+            }
+            scrollTo(targetScrollX, 0);
+        }
+    }
+
+    private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
+        private int mScrollState;
 
         @Override
-        public void onPageScrolled(int position, float positionOffset,
-                                   int positionOffsetPixels) {
-            currentPosition = position;
-            currentPositionOffset = positionOffset;
-            invalidate();
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            int tabStripChildCount = mTabStrip.getChildCount();
+            if ((tabStripChildCount == 0) || (position < 0) || (position >= tabStripChildCount)) {
+                return;
+            }
+            mTabStrip.onViewPagerPageChanged(position, positionOffset);
+            View selectedTitle = mTabStrip.getChildAt(position);
+            int extraOffset = (selectedTitle != null)
+                    ? (int) (positionOffset * selectedTitle.getWidth())
+                    : 0;
+            scrollToTab(position, extraOffset);
+            if (mViewPagerPageChangeListener != null) {
+                mViewPagerPageChangeListener.onPageScrolled(position, positionOffset,
+                        positionOffsetPixels);
+            }
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                isFirstInto = false;
-                scrollTab();
+            mScrollState = state;
+            if (mViewPagerPageChangeListener != null) {
+                mViewPagerPageChangeListener.onPageScrollStateChanged(state);
             }
         }
 
         @Override
         public void onPageSelected(int position) {
-            if (isFirstInto) {
-                scrollTabFast();
+            if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                mTabStrip.onViewPagerPageChanged(position, 0f);
+                scrollToTab(position, 0);
             }
-            // 判断是否选中
-            for (int j = 0; j < tabsContainer.getChildCount(); j++) {
-                View checkView = tabsContainer.getChildAt(j);
-                boolean ischeck;
-                if (j == position) {
-                    ischeck = true;
-                } else {
-                    ischeck = false;
+
+            if (mViewPagerPageChangeListener != null) {
+                mViewPagerPageChangeListener.onPageSelected(position);
+            }
+        }
+    }
+
+
+    private class TabClickListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            for (int i = 0; i < mTabStrip.getChildCount(); i++) {
+                if (v == mTabStrip.getChildAt(i)) {
+                    mViewPager.setCurrentItem(i);
+                    return;
                 }
-                checkView.setSelected(ischeck);
             }
         }
     }
 
-    private void scrollTabFast() {
-        for (int i = 0; i < tabsContainer.getChildCount(); i++) {
-            View checkView = tabsContainer.getChildAt(pager.getCurrentItem());
-            int k = checkView.getMeasuredWidth();
-            int l = checkView.getLeft();
-            int i2 = l + k / 2 - 1080 / 2;
-            smoothScrollTo(i2, 0);
-        }
+    private int dpToPx(float dps) {
+        return Math.round(this.getResources().getDisplayMetrics().density * dps);
     }
 
-    private void scrollTab() {
-        for (int i = 0; i < tabsContainer.getChildCount(); i++) {
-            View checkView = tabsContainer.getChildAt(pager.getCurrentItem());
-            int k = checkView.getMeasuredWidth();
-            int l = checkView.getLeft();
-            int i2 = l + k / 2 - 1080 / 2;
-            smoothScrollToSlow(i2, 0, HORIZATOL_SCROLLVIEW_SPEED);
-        }
+    /**
+     * tab被选中
+     *
+     * @param position
+     * @param mCurrentPosition
+     */
+    protected void onTabSelected(int position, int mCurrentPosition) {
     }
 
-    public void smoothScrollToSlow(int fx, int fy, int duration) {
-        int dx = fx - getScrollX();//mScroller.getFinalX();
-        int dy = fy - getScrollY();  //mScroller.getFinalY();
-        smoothScrollBySlow(dx, dy, duration);
+    /**
+     * 设置默认选中tab
+     *
+     * @param currentPosition
+     */
+    public void setCurrentPosition(int currentPosition) {
+        this.mCurrentPosition = currentPosition;
     }
 
-    public void smoothScrollBySlow(int dx, int dy, int duration) {
-        mScroller.startScroll(getScrollX(), getScrollY(), dx, dy, duration);
-        invalidate();
+    public float getSlidingTabMarginLeft() {
+        return slidingTabMarginLeft;
     }
 
-    @Override
-    public void computeScroll() {
-        if (mScroller.computeScrollOffset()) {
-            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            postInvalidate();
-        }
-        super.computeScroll();
+    public float getSlidingTabMarginRight() {
+        return slidingTabMarginRight;
     }
 
+    public float getCountPerScreen() {
+        return countPerScreen;
+    }
 
+    public void setCountPerScreen(float countPerScreen) {
+        this.countPerScreen = countPerScreen;
+    }
+
+    public void setSlidingTabTextSelectColor(int color) {
+        slidingTabTextSelectColor = color;
+    }
+
+    public void setSlidingTabIndicatorColor(int color) {
+        slidingTabIndicatorColor = color;
+    }
 }
