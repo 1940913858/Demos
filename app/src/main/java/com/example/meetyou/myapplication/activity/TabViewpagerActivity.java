@@ -48,9 +48,6 @@ public class TabViewpagerActivity extends FragmentActivity implements View.OnCli
         category_stripsss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("senfa", "onClick: " );
-
-
                 // create new fragments
                 pages.clear();
                 pages.add(MyFragment.newInstance(444));
@@ -164,7 +161,6 @@ public class TabViewpagerActivity extends FragmentActivity implements View.OnCli
 
         @Override
         public long getItemId(int position) {
-            Log.e("senfa", "getItemId: " );
             // give an ID different from position when position has been changed
             return baseId + position;
         }
@@ -183,13 +179,11 @@ public class TabViewpagerActivity extends FragmentActivity implements View.OnCli
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            Log.e("senfa", "instantiateItem: " );
             return super.instantiateItem(container, position);
         }
 
         @Override
         public Fragment getItem(int i) {
-            Log.e("senfa", "getItem: " );
             return pages.get(i);
         }
 

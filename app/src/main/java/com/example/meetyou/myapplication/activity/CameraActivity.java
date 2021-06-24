@@ -266,7 +266,6 @@ public class CameraActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Log.e("senfa", "onImageAvailable: sss");
             //当图片可得到的时候获取图片并保存
             //创建文件
             mFile = new File(getExternalFilesDir(null)+""+System.currentTimeMillis()+"pic.jpg");

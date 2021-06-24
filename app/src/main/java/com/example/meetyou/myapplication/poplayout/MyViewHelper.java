@@ -67,7 +67,6 @@ public class MyViewHelper implements View.OnClickListener {
         myLightView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("senfa", "onClick: view " );
             }
         });
 

@@ -31,7 +31,6 @@ public class ChatList {
         this.pictureFilePaths.clear();
         this.pictureFilePaths.addAll(builder.mPictureFilePaths);
 //        this.pictureFilePaths = builder.mPictureFilePaths;
-        Log.e("senfa", "builder.mPictureFilePaths: "+builder.mPictureFilePaths+"---pictureFilePaths = "+pictureFilePaths);
         this.Time = builder.Time;
         this.Voice = builder.Voice;
         this.Player = builder.Player;

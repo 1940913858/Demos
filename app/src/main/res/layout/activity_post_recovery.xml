@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.meetyou.myapplication.helper.CustomCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/layout">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_scrollFlags="scroll"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.example.meetyou.myapplication.helper.CustomBehavior">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <com.example.meetyou.myapplication.view.CategoryTabStrip
                 android:id="@+id/category_strip"
                 android:layout_width="match_parent"
@@ -26,13 +30,16 @@
                 app:slidingTabTextSelectSize="18sp"
                 app:slidingTabTextSize="16sp"/>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
             <com.example.meetyou.myapplication.view.WrapContentHeightViewPager
                 android:id="@+id/fragment_rank_list_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
         </LinearLayout>
-
-
 
         <com.example.meetyou.myapplication.view.CategoryTabStrip
             android:id="@+id/bottom_strip"
@@ -56,4 +63,12 @@
         app:layout_behavior="com.example.meetyou.myapplication.poplayout.FixScrollingFooterBehavior" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+    <com.example.meetyou.myapplication.view.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+</com.example.meetyou.myapplication.helper.CustomCoordinatorLayout>

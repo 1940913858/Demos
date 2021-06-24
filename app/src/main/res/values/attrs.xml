@@ -164,4 +164,14 @@
         <attr format="float" name="countPerScreen"/>
     </declare-styleable>
 
+    <declare-styleable name="CourseTagsView">
+        <attr name="text_background" format="reference" />
+        <attr name="text_color" format="color" />
+        <attr name="line_padding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioRelativeLayout">
+        <attr format="float" name="view_ratio"/>
+    </declare-styleable>
+
 </resources>

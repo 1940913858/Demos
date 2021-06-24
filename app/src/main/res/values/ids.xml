@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="loading_view_centerLinearLayout" type="id"/>
+    <item name="loading_view_relativeLayout" type="id"/>
+</resources>

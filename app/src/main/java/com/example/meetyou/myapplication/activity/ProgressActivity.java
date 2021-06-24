@@ -18,8 +18,6 @@ public class ProgressActivity extends Activity {
 //        BigDecimal b = new BigDecimal((2 / 3)).setScale(1, BigDecimal.ROUND_HALF_UP);
         float pressent = (float) 2 / 3 * 100;
         int round = Math.round(pressent);
-        Log.e("senfa", "onDraw: "+round );
-
 
 
         setContentView(R.layout.activity_progress);

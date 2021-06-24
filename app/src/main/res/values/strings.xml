@@ -260,4 +260,9 @@
     <string name="tc_video_editer_activity_show_publish_dialog_publish">发布</string>
 
     <string name="tc_video_editer_activity_cancel_video_generation">取消视频生成</string>
+
+
+    <string name="no_record">暂时没有数据哦~</string>
+    <string name="failed_to_retry">当前网络缓慢，请点击重新加载</string>
+    <string name="no_internet_for_loading">网络不见了，请检查网络后点击重新加载</string>
 </resources>

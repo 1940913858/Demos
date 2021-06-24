@@ -1,11 +1,13 @@
 package com.example.meetyou.myapplication.view;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 /**
  * Created by chensenfa
@@ -13,53 +15,47 @@ import android.view.View;
 public class NoScrollViewPager extends ViewPager {
 
     private boolean noScroll = true;
+    private int touchSlop;
     private boolean smoothScroll = true;//是否要滑动动画
 
     public NoScrollViewPager(Context context) {
         super(context);
+        touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
     public NoScrollViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    private float lastRawY;
-    private float lastRawX;
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return !noScroll && super.onTouchEvent(event);
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
-//        switch (event.getAction()) {
+//    float mLastX;
+//    float mLastY;
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        int x = (int) ev.getX();
+//        int y = (int) ev.getY();
+//
+//        switch (ev.getAction()) {
 //            case MotionEvent.ACTION_DOWN:
-//                lastRawY = event.getRawY();
-//                lastRawX = event.getRawX();
+//                mLastX = x;
+//                mLastY = y;
 //                break;
 //            case MotionEvent.ACTION_MOVE:
-//                float deltaX = event.getRawX() - lastRawX;
-//                float deltaY = event.getRawY() - lastRawY;
-//                lastRawY = event.getRawY();
-//                lastRawX = event.getRawX();
-//// || Math.abs(deltaX) < Math.abs(deltaY)
-//                Log.e("senfa", "onInterceptTouchEvent: "+(Math.abs(deltaX) > Math.abs(deltaY)) );
-//                if (Math.abs(deltaX) > Math.abs(deltaY)) {//左右滑
-//                    return true;
-//                } else {//上下滑
-//                    return super.onInterceptTouchEvent(event);
-//                }
-//            case MotionEvent.ACTION_CANCEL:
+//                Log.e("senfa", "ACTION_MOVE: ");
+//                getParent().requestDisallowInterceptTouchEvent(false);
+//                break;
 //            case MotionEvent.ACTION_UP:
-//                lastRawY = 0;
-//                lastRawX = 0;
+//                int dx = (int) Math.abs(x - mLastX);
+//                int dy = (int) Math.abs(y - mLastY);
+//                if (dx <= touchSlop && dy <= touchSlop) {
+//                    Log.e("senfa", "点击: ");
+//                    getParent().requestDisallowInterceptTouchEvent(true);
+//                }
+//                break;
+//            case MotionEvent.ACTION_CANCEL:
 //                break;
 //        }
-//        return false;
-
-        return true;
-    }
+//        return super.dispatchTouchEvent(ev);
+//    }
 
     //去除页面切换时的滑动翻页效果
     @Override
@@ -96,7 +92,7 @@ public class NoScrollViewPager extends ViewPager {
         this.smoothScroll = smoothScroll;
     }
 
-    public void setNoScroll(boolean noScroll){
+    public void setNoScroll(boolean noScroll) {
         this.noScroll = noScroll;
     }
 }

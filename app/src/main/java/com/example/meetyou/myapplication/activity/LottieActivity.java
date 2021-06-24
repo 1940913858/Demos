@@ -40,7 +40,6 @@ public class LottieActivity extends Activity {
         for (int i = 0;i<6;i++){
 
             int lilv = lixi / money;
-            Log.e("senfa", "onCreate: "+lilv );
 
             money = money-5000;
 

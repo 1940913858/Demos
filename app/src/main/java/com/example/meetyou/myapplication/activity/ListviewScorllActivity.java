@@ -96,7 +96,6 @@ public class ListviewScorllActivity extends Activity{
 //                View viewById = childView.findViewById(R.id.head);
                 if (viewById == null){
 //                    text2.setVisibility(View.VISIBLE);
-                    Log.e("senfa", "onScrolled: "+ viewById);
                     return;
                 }
 

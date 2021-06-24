@@ -86,7 +86,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             View sendText = LayoutInflater.from(context).inflate(R.layout.item_chat_send_out_text,
                     parent,false);
 
-            Log.e("senfa", "onCreateViewHolder: "+sendText);
             ChatListAdapter.ViewHolderSendOutText viewHolder = new ChatListAdapter
                     .ViewHolderSendOutText(sendText,mItemClickListener);
             return viewHolder;
@@ -133,7 +132,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder instanceof ViewHolderSendOutImage) {
             ChatList chatList = list.get(position);
             List<String> pictureFilePaths = chatList.getPictureFilePaths();
-            Log.e("senfa", "onBindViewHolder: "+chatList.getPictureFilePaths() +"posi sss= "+position);
 
             ((ViewHolderSendOutImage) holder).iv_send_image_ll.removeAllViews();
             for (int i = 0;i<pictureFilePaths.size();i++){

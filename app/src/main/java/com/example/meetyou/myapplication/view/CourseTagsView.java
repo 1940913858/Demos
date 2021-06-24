@@ -2,37 +2,49 @@
 package com.example.meetyou.myapplication.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.meetyou.myapplication.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 带展开按钮的tag型布局
  */
-public class SearchHotView extends ViewGroup {
+public class CourseTagsView extends ViewGroup {
 
     private Context mContext;
+    private int dp28;
+    private int dp12;
+    private int line_paddingTop;
+    private android.graphics.drawable.Drawable text_background;
+    private int text_color;
 
-    public SearchHotView(Context context) {
+    public CourseTagsView(Context context) {
         this(context, null);
     }
 
-    public SearchHotView(Context context, AttributeSet attrs) {
+    public CourseTagsView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SearchHotView(Context context, AttributeSet attrs, int defStyle) {
+    public CourseTagsView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
+        dp28 = dip2px(context, 28);
+        dp12 = dip2px(context, 12);
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CourseTagsView);
+        text_background = ta.getDrawable(R.styleable.CourseTagsView_text_background);
+        text_color = ta.getColor(R.styleable.CourseTagsView_text_color, Color.parseColor("#888888"));
+        line_paddingTop = (int) ta.getDimension(R.styleable.CourseTagsView_line_padding, dip2px(context, 8));
+        ta.recycle();
     }
 
     @Override
@@ -52,9 +64,10 @@ public class SearchHotView extends ViewGroup {
 
         // 获取子view的个数
         int childCount = getChildCount();
+        int lineCount = 0;
 
         for (int i = 0; i < childCount; i++) {
-            View child = getChildAt(i);
+            android.view.View child = getChildAt(i);
             // 测量子View的宽和高
             measureChild(child, widthMeasureSpec, heightMeasureSpec);
             // 得到LayoutParams
@@ -67,20 +80,24 @@ public class SearchHotView extends ViewGroup {
 
             // 换行时候
             if (lineWidth + childWidth > sizeWidth) {
-                // 对比得到最大的宽度
-                width = Math.max(width, lineWidth);
-                // 重置lineWidth
-                lineWidth = childWidth;
-                // 记录行高
-                height += lineHeight;
-                lineHeight = childHeight;
+                if (lineCount < 1){
+                    // 对比得到最大的宽度
+                    width = Math.max(width, lineWidth);
+                    // 重置lineWidth
+                    lineWidth = childWidth;
+                    // 记录行高
+                    height += lineHeight;
+                    lineHeight = childHeight;
+                }
+
+                lineCount++;
             } else {// 不换行情况
                 // 叠加行宽
                 lineWidth += childWidth;
                 // 得到最大行高
                 lineHeight = Math.max(lineHeight, childHeight);
             }
-            // 处理最后一个子View的情况
+            // 处理最后一个子View的情况,减去bottom和第一行的top
             if (i == childCount - 1) {
                 width = Math.max(width, lineWidth);
                 height += lineHeight - lp.bottomMargin - lp.topMargin;
@@ -92,12 +109,12 @@ public class SearchHotView extends ViewGroup {
     }
 
     // 存储所有子View
-    private List<List<View>> mAllChildViews = new ArrayList<List<View>>();
+    private java.util.List<java.util.List<android.view.View>> mAllChildViews = new ArrayList<java.util.List<android.view.View>>();
     // 每一行的高度
-    private List<Integer> mLineHeight = new ArrayList<Integer>();
+    private java.util.List<Integer> mLineHeight = new ArrayList<Integer>();
 
     // 记录当前行的view
-    private List<View> lineViews = new ArrayList<View>();
+    private java.util.List<android.view.View> lineViews = new ArrayList<android.view.View>();
 
     /**
      * 是否是被break出来的
@@ -118,18 +135,18 @@ public class SearchHotView extends ViewGroup {
 
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
-            View child = getChildAt(i);
+            android.view.View child = getChildAt(i);
             MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
             int childWidth = child.getMeasuredWidth();
             int childHeight = child.getMeasuredHeight();
 
             if (mAllChildViews.size() == linesCount - 1 && mIsNeedCheckLines) {//第二行开始,需要加上按钮计算
                 // 如果需要换行
-                if (childWidth + lineWidth + lp.leftMargin + lp.rightMargin + 28 * 3 > width){
+                if (childWidth + lineWidth + lp.leftMargin + lp.rightMargin + dp28 > width) {
                     // 记录LineHeight
                     mLineHeight.add(lineHeight);
                     // 记录当前行的Views
-                    if (lineWidth + lp.leftMargin + lp.rightMargin + 28 * 3 > width){
+                    if (lineWidth + lp.leftMargin + lp.rightMargin + dp28 > width) {
                         lineViews.remove(lineViews.size() - 1);//先remove最后一个，再添加到容器里
                     }
                     mAllChildViews.add(lineViews);
@@ -141,9 +158,10 @@ public class SearchHotView extends ViewGroup {
                     isBreak = true;
                     break;
                 }
+
             } else {
                 // 如果需要换行
-                if (childWidth + lineWidth + lp.leftMargin + lp.rightMargin > width) {
+                if (childWidth + lineWidth + lp.leftMargin + lp.rightMargin > width && mLineHeight.size() <= 1) {
                     // 记录LineHeight
                     mLineHeight.add(lineHeight);
                     // 记录当前行的Views
@@ -158,23 +176,25 @@ public class SearchHotView extends ViewGroup {
 
 
             lineWidth += childWidth + lp.leftMargin + lp.rightMargin;
-            if (mLineHeight != null && mLineHeight.size() == 0){//只有一行的时候，不需要topmargin
+            if (mLineHeight != null && mLineHeight.size() == 0) {//只有一行的时候，不需要topmargin
                 lineHeight = Math.max(lineHeight, childHeight + lp.bottomMargin);
-            }else{
+            } else {
                 lineHeight = Math.max(lineHeight, childHeight + lp.topMargin + lp.bottomMargin);
             }
 
+            if(mLineHeight.size() <= 1){
+                lineViews.add(child);
+            }
 
-            lineViews.add(child);
         }
-        // 处理最后一行
 
+        // 处理最后一行
         if (isBreak) {
             removeAllViews();
 
             int all = 0;
             for (int i = 0; i < mAllChildViews.size(); i++) {
-                List<View> views = mAllChildViews.get(i);
+                java.util.List<android.view.View> views = mAllChildViews.get(i);
                 all += views.size();
             }
 
@@ -189,12 +209,11 @@ public class SearchHotView extends ViewGroup {
 
             textList.add("1");
 
-//            mIsNeedCheckLines = false;
+            mIsNeedCheckLines = false;
             isBreak = false;
 
             initHotWordShow(textList);
-        }
-        else{
+        } else {
             mLineHeight.add(lineHeight);
             mAllChildViews.add(lineViews);
         }
@@ -209,16 +228,16 @@ public class SearchHotView extends ViewGroup {
             lineViews = mAllChildViews.get(i);
             lineHeight = mLineHeight.get(i);
             for (int j = 0; j < lineViews.size(); j++) {
-                View child = lineViews.get(j);
+                android.view.View child = lineViews.get(j);
                 // 判断是否显示
-                if (child.getVisibility() == View.GONE) {
+                if (child.getVisibility() == android.view.View.GONE) {
                     continue;
                 }
                 MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
                 int cLeft = left + lp.leftMargin;
                 int cTop = top + lp.topMargin;
                 if (i == 0) {//只有一行的时候，不需要topmargin
-                     cTop = top;
+                    cTop = top;
                 }
                 int cRight = cLeft + child.getMeasuredWidth();
                 int cBottom = cTop + child.getMeasuredHeight();
@@ -238,7 +257,7 @@ public class SearchHotView extends ViewGroup {
     //全部list
     private ArrayList<String> mTextBaseList = new ArrayList<>();
 
-    public void setList(ArrayList<String> textBaseList) {
+    public void setList(java.util.List<String> textBaseList) {
         mTextBaseList.clear();
         mTextBaseList.addAll(textBaseList);
         initHotWordShow(mTextBaseList);
@@ -256,28 +275,41 @@ public class SearchHotView extends ViewGroup {
 
         MarginLayoutParams lp = new MarginLayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        lp.rightMargin = 8 * 3;
-        lp.topMargin = 8 * 3;
+        lp.rightMargin = line_paddingTop;
+        lp.topMargin = line_paddingTop;
 
         for (int i = 0; i < list.size(); i++) {
-            View inflate = LayoutInflater.from(mContext).inflate(R.layout.activity_item, null);
+            android.view.View inflate = LayoutInflater.from(mContext).inflate(R.layout.course_tags_layout, null);
             ImageView image = inflate.findViewById(R.id.image);
-            TextView text = inflate.findViewById(R.id.text);
+            final android.widget.TextView text = inflate.findViewById(R.id.text);
+            if (text_background == null) {
+                text.setBackground(getResources().getDrawable(R.drawable.shape_course_detail_tags));
+            } else {
+                text.setBackground(text_background);
+            }
 
-            image.setVisibility(View.GONE);
-            text.setVisibility(View.VISIBLE);
-
+            text.setTextColor(text_color);
+            text.setId(i);
             text.setText(list.get(i));
 
+            text.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(android.view.View view) {
+                    if (mOnLineListener != null) {
+                        mOnLineListener.onItemClick(text.getId());
+                    }
+                }
+            });
+
             //最后一个设置为28 28按钮
-            if (mIsNeedCheckLines && i == list.size() - 1) {
-                image.setVisibility(View.VISIBLE);
-                text.setVisibility(View.GONE);
+            if (!mIsNeedCheckLines && i == list.size() - 1 && !mExpand) {
+                image.setVisibility(android.view.View.VISIBLE);
+                text.setVisibility(android.view.View.GONE);
 
                 image.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        mIsNeedCheckLines = false;
+                    public void onClick(android.view.View view) {
+                        mExpand = true;
                         initHotWordShow(mTextBaseList);
                     }
                 });
@@ -304,23 +336,37 @@ public class SearchHotView extends ViewGroup {
         this.mIsNeedCheckLines = isNeedCheckLines;
     }
 
+    public void setExpand(boolean expand) {
+        this.mExpand = expand;
+    }
+
     private int linesCount;
 
     public void setCheckLinesCount(int linesCount) {
         this.linesCount = linesCount;
     }
 
-    public OnLineListener mOnLineListener;
+    public OnItemClickListener mOnLineListener;
 
-    public void setOnLineListener(OnLineListener onLineListener) {
+    public void setOnItemClickListener(OnItemClickListener onLineListener) {
         this.mOnLineListener = onLineListener;
     }
 
-    public interface OnLineListener {
+    public interface OnItemClickListener {
         /***
          * 2行时个数
          */
         void getChildView(int count);
+
+        void onItemClick(int position);
+    }
+
+    private static float mDensity;
+
+    public int dip2px(Context context, float dipValue) {
+        if (mDensity == 0)
+            mDensity = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * mDensity + 0.5f);
     }
 
 }

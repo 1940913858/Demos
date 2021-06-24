@@ -193,7 +193,6 @@ public class AutoScrollTextView extends TextSwitcher implements
 
     @Override
     public TextView makeView() {
-        Log.e("senfa", "makeView: " +textColor+"--mTextSize"+mTextSize);
         TextView t = new TextView(mContext);
         t.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
         t.setMaxLines(1);

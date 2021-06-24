@@ -55,8 +55,10 @@ public class ContentListFragment extends Fragment {
             ss = bundle.getString("DAY");
         }
 
+        Log.e("senfa", "onCreateView: "+ss );
+
         mEntityList.clear();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 50; i++) {
             mEntityList.add( i + ss);
         }
 
@@ -86,7 +88,6 @@ public class ContentListFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             viewHolder.fruitName.setText(bEntityList.get(i));
 
-            Log.e("senfa", "onBindViewHolder: "+i );
         }
 
         @Override

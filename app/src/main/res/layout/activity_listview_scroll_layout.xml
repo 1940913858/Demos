@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.meetyou.myapplication.view.RecycleScrollLayout
+        android:id="@+id/recycleScrollLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            android:orientation="vertical">
+
+            <com.example.meetyou.myapplication.view.LookMoreBgView
+                android:id="@+id/lookMoreBgView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right" />
+
+            <LinearLayout
+                android:id="@+id/layout_lookmore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查"
+                    android:textColor="#c5c5c5"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="看"
+                    android:textColor="#c5c5c5"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更"
+                    android:textColor="#c5c5c5"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="多"
+                    android:textColor="#c5c5c5"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </com.example.meetyou.myapplication.view.RecycleScrollLayout>
+
+
+</RelativeLayout>

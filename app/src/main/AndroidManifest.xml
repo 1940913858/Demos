@@ -16,12 +16,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.Camera" />
     <uses-permission android:name="android.hardware.camera.autofocus" />
-
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".DemoApplication"
@@ -31,7 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:appComponentFactory=""
+        android:appComponentFactory="1"
         tools:replace="android:appComponentFactory">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -40,6 +39,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.ListviewScorllLayoutActivity"
+            android:label="滑动到最后继续滑动进入下一界面">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
 
         <activity
             android:name=".activity.HorizontalRvActivity"

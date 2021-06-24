@@ -65,7 +65,6 @@ public class AnalysiMoodsView extends View {
         calendarEnd = calendarClone;
 
         days = daysBetween(calendarEnd, calendarStart) + 1;
-        Log.e("senfa", "initView: " + days);
     }
 
     private int days;

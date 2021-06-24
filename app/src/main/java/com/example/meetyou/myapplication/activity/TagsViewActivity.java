@@ -25,8 +25,9 @@ public class TagsViewActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textBaseList.add("什么鬼");
-                mSearchHotView.setList(textBaseList);
+//                textBaseList.add("什么鬼");
+//                mSearchHotView.setList(textBaseList);
+                mSearchHotView.removeAllViews();
             }
         });
 
@@ -62,8 +63,8 @@ public class TagsViewActivity extends Activity {
         }
 
         mSearchHotView = findViewById(R.id.search_hotview);
-        mSearchHotView.setCheckLinesCount(2);
-        mSearchHotView.setIsNeedCheckLines(true);
+//        mSearchHotView.setCheckLinesCount(2);
+//        mSearchHotView.setIsNeedCheckLines(true);
 
         mSearchHotView.setList(textBaseList);
 
