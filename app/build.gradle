@@ -43,11 +43,6 @@ dependencies {
 
     implementation 'jp.co.cyberagent.android:gpuimage:2.0.4'
 
-    // 导入短视频SDK aar，LiteAVSDK_UGC_x.x.xxxx 请自行修改为最新版本号
-    compile(name: 'LiteAVSDK_UGC_6.8.8003', ext: 'aar')
-    // 导入腾讯云短视频SDK jar
-    compile fileTree(dir: 'src/main/jniLibs', includes: ['*.jar'])
-    //compile(name: 'volley-1.0.0', ext: 'aar')
     // okhttp3的依赖
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
 
