@@ -30,6 +30,23 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="mine_mode_change_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="mine_mode_change_content_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
     <style name="ConfirmDialogStyle" parent="NormalDialog">
 
         <!--<item name="windowMinWidthMinor">90%</item>-->

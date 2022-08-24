@@ -174,4 +174,29 @@
         <attr format="float" name="view_ratio"/>
     </declare-styleable>
 
+    <!--阴影布局 -->
+    <declare-styleable name="ShadowLayout">
+        <!-- 阴影颜色-->
+        <attr name="shadowColor" format="color" />
+        <!-- 圆角大小，默认无圆角0-->
+        <attr name="shadowRadius" format="dimension" />
+        <!-- 模糊半径 -->
+        <attr name="blurRadius" format="dimension" />
+        <!-- 是否有点击效果-->
+        <attr name="hasEffect" format="boolean" />
+        <attr name="bgColor" format="color" />
+        <!-- 水平位移-->
+        <attr name="xOffset" format="dimension" />
+        <!--竖直位移 -->
+        <attr name="yOffset" format="dimension" />
+        <!--阴影类型 -->
+        <attr name="shadowType" format="dimension">
+            <flag name="top" value="100" />
+            <flag name="bottom" value="10" />
+            <flag name="left" value="1000" />
+            <flag name="right" value="1" />
+        </attr>
+
+    </declare-styleable>
+
 </resources>

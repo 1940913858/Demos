@@ -49,6 +49,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.AnimationTranActivity"
+            android:label="位移动画">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activity.HorizontalRvActivity"

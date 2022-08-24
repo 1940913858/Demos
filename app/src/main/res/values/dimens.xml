@@ -12,4 +12,6 @@
     <dimen name="repeat_slider_width">26dp</dimen>
     <!--h5-->
     <dimen name="h5">13sp</dimen>
+    <dimen name="bbj_default_shadow_corner_radius">4dp</dimen>
+    <dimen name="bbj_default_shadow_radius">4dp</dimen>
 </resources>

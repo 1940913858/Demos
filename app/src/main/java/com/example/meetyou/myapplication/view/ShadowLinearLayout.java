@@ -69,7 +69,7 @@ public class ShadowLinearLayout extends LinearLayout {
 
         RectF rect = new RectF();
         rect.left = 0;
-        rect.top = 0;
+        rect.top = 18;
         rect.right = getMeasuredWidth();
         rect.bottom = getMeasuredHeight() -18;
         pCanvas.drawRoundRect(rect, 30, 30, mOriginPaint);

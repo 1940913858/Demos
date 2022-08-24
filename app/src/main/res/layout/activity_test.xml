@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/edu_apk_all_white_selector"
     tools:ignore="UselessParent"
-    android:layout_marginTop="20dp">
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
 
     <com.example.meetyou.myapplication.view.CourseTagsView
         android:id="@+id/item_tag_layout"
@@ -18,4 +19,24 @@
         android:layout_alignParentBottom="true">
     </com.example.meetyou.myapplication.view.CourseTagsView>
 
-</RelativeLayout>
+    <com.example.meetyou.myapplication.view.shadow.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:bgColor="#f5f5f5"
+        app:blurRadius="2dp"
+        app:shadowColor="#ff0055"
+        app:shadowRadius="6dp"
+        app:shadowType="top|bottom|right|left">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/mini_img_huaiyun"/>
+
+    </com.example.meetyou.myapplication.view.shadow.ShadowLayout>
+
+
+
+
+
+</LinearLayout>

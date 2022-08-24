@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--身份切换-->
+    <RelativeLayout
+        android:id="@+id/rl_header_change_model"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/mine_mode_change_radius_8"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/mine_mode_change_tran_iv"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/mine_mode_tran_radius_8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/ll_change_period"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:src="@drawable/mini_img_huaiyun" />
+
+
+                <TextView
+                    android:id="@+id/tv_title_period"
+                    style="@style/mine_mode_change_title_style"
+                    android:text="只记经期" />
+
+                <TextView
+                    android:id="@+id/tv_status_period"
+                    style="@style/mine_mode_change_content_style"
+                    android:layout_below="@+id/tv_title_period"
+                    android:text="当前状态" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_change_beiyun"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mini_img_jingqi" />
+
+                <TextView
+                    android:id="@+id/tv_title_beiyun"
+                    style="@style/mine_mode_change_title_style"
+                    android:text="我在备孕" />
+
+                <TextView
+                    android:id="@+id/tv_status_beiyun"
+                    style="@style/mine_mode_change_content_style"
+                    android:layout_below="@+id/tv_title_beiyun"
+                    android:text="当前状态" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_change_pregnancy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mini_img_jingqi" />
+
+                <TextView
+                    android:id="@+id/tv_title_huaiyun"
+                    style="@style/mine_mode_change_title_style"
+                    android:text="我在怀孕" />
+
+                <TextView
+                    android:id="@+id/tv_status_huaiyun"
+                    style="@style/mine_mode_change_content_style"
+                    android:layout_below="@+id/tv_title_huaiyun"
+                    android:text="当前状态" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_change_baby"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mini_img_jingqi" />
+
+                <TextView
+                    android:id="@+id/tv_title_baby"
+                    style="@style/mine_mode_change_title_style"
+                    android:text="我有宝宝" />
+
+                <TextView
+                    android:id="@+id/tv_status_baby"
+                    style="@style/mine_mode_change_content_style"
+                    android:layout_below="@+id/tv_title_baby"
+                    android:text="当前状态" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
