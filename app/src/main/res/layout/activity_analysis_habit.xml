@@ -10,7 +10,7 @@
     <com.example.meetyou.myapplication.view.AnalysisHabitView
         android:id="@+id/analysis_habit_view"
         android:layout_width="215dp"
-        android:layout_height="15dp"
+        android:layout_height="16dp"
         android:visibility="gone"/>
 
 
