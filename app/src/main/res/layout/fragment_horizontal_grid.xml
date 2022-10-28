@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.ckr.pageview.view.PageView
+        android:id="@+id/pageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:autosize="true"
+        app:clipToPadding="false"
+        app:hide_indicator="false"
+        app:indicator_container_background="#40000000"
+        app:indicator_container_height="@dimen/viewpager_indicator_container_height"
+        app:indicator_group_alignment="right|center_vertical"
+        app:indicator_group_marginBottom="10dp"
+        app:indicator_group_marginRight="10dp"
+        app:indicator_margin="@dimen/viewpager_indicator_margin"
+        app:layout_flag="grid"
+        app:orientation="horizontal"
+        app:overlap_layout="true"
+        app:pagePadding="@dimen/page_padding"
+        app:page_column="4"
+        app:page_row="3"
+        app:selected_indicator_color="@color/viewpager_selected_indicator_color"
+        app:selected_indicator_diameter="@dimen/viewpager_selected_indicator_diameter"
+        app:selected_indicator_drawable="@drawable/shape_point_selected"
+        app:unselected_indicator_color="@color/viewpager_unselected_indicator_color"
+        app:unselected_indicator_diameter="@dimen/viewpager_unselected_indicator_diameter"
+        app:unselected_indicator_drawable="@drawable/shape_point_unselected"/>
+
+</FrameLayout>

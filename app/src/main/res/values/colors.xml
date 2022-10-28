@@ -60,4 +60,11 @@
 
     <color name="colorGray4">#787878</color>
     <color name="bbj_default_shadow_color">#88757575</color>
+
+    <color name="color1">#6c3d61</color>
+    <color name="color2">#6c87e1</color>
+    <color name="color3">#8c6472</color>
+    <color name="color4">#7b6f45</color>
+    <color name="color5">#517c3f</color>
+    <color name="color6">#478384</color>
 </resources>

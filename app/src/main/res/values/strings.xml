@@ -1,4 +1,13 @@
 <resources>
+
+    <string-array name="tab_title">
+        <item>无限轮播</item>
+        <item>水平网格</item>
+        <item>竖直线性</item>
+        <item>竖直网格</item>
+        <item>水平网格2</item>
+    </string-array>
+
     <string name="app_name">My Application</string>
 
     <string name="horizotal_recyclerview">无限循环的横向RecyclerView完美实现</string>
@@ -265,4 +274,10 @@
     <string name="no_record">暂时没有数据哦~</string>
     <string name="failed_to_retry">当前网络缓慢，请点击重新加载</string>
     <string name="no_internet_for_loading">网络不见了，请检查网络后点击重新加载</string>
+
+    <string name="content">
+        Android中有许多控件支持用户进行拖拽，滑动等操作，比如SeekBar，ViewPager，ScrollView，RecyclerView等等。随着业务的展现的需求变化，UI越来越复杂，不可避免的就会出现嵌套的多个可滑动View的情况，比如ViewPager中套ViewPager，ScrollView中套ViewPager，ViewPager中套RecyclerView，还有一些开发者自行开发的，可接受滑动手势的控件与标准控件的嵌套。
+        \n
+        对于这种模式,我们需要结合实际的业务来进行相关的处理,假设现在有一个继承Linearlayout上下滑动的父容器ScrollLayout,在它里面放置了一个Header和一个ListView,从而会出现上下滑动的一个冲突,假设以下是需要实现的业务逻辑完:
+    </string>
 </resources>
