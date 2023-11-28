@@ -16,9 +16,6 @@ import com.example.meetyou.myapplication.view.pagerecyclerview.model.Item;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-
-//import com.ckr.pageview.view.PageRecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +24,6 @@ public class PageFragment extends BaseFragment implements PageRecyclerView.OnPag
 	private static final String TAG = "PageFragment";
 	private static final String ID_LAYOUT = "layoutId";
 	private static final String ID_LAYOUT_ITEM = "itemLayoutId";
-	@BindView(R.id.pageView)
 	PageView pageView;
 	private MainAdapter mainAdapter;
 	private ArrayList<Item> items;
@@ -69,6 +65,7 @@ public class PageFragment extends BaseFragment implements PageRecyclerView.OnPag
 	}
 
 	private void initView() {
+		pageView = view.findViewById(R.id.pageView);
 		pageView.addOnPageChangeListener(this);
 		//AppCompatActivity版本>=26.1.0才生效
 		//pageView.registerLifeCycleObserver();

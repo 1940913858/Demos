@@ -9,12 +9,8 @@ import com.example.meetyou.myapplication.R;
 import com.example.meetyou.myapplication.view.pagerecyclerview.MainFragment;
 
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public class PageRecyclerviewActivity extends AppCompatActivity {
 
-    private Unbinder unbinder;
     private MainFragment mainFragment;
     private int lastIndex;
 
@@ -22,7 +18,6 @@ public class PageRecyclerviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_rv);
-        unbinder = ButterKnife.bind(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
             mainFragment = MainFragment.newInstance();
         if (savedInstanceState == null) {
@@ -34,12 +29,6 @@ public class PageRecyclerviewActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().show(mainFragment = (MainFragment) fragmentManager.findFragmentByTag(MainFragment.class.getName()))
                     .commit();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
     }
 
 }

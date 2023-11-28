@@ -10,24 +10,19 @@ import android.view.ViewGroup;
 
 import com.ckr.pageview.transform.BaseTransformer;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 
 /**
  * Created by PC大佬 on 2018/1/14.
  */
 
 public abstract class BaseFragment extends Fragment {
-	private View view;
-	private Unbinder unbinder;
+	protected View view;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		view = inflater.inflate(getContentLayoutId(), container, false);
-		unbinder = ButterKnife.bind(this, view);
 		init();
 		return view;
 	}
@@ -39,12 +34,6 @@ public abstract class BaseFragment extends Fragment {
 		if (getUserVisibleHint()) {
 			onVisible();
 		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		unbinder.unbind();
 	}
 
 	protected abstract int getContentLayoutId();
